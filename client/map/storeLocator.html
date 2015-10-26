@@ -1,0 +1,80 @@
+<template name="storeLocator">
+	<div id="wrapper" class="map_plot_page">
+		<section>
+			<span>Filters</span>
+			<div>
+				Show Store within 
+				<select>
+					<option>Any Range</option>
+					<option>1 KM</option>
+					<option>2 KM</option>
+					<option>5 KM</option>
+					<option>10 KM</option>
+				</select>
+			</div>
+			<div>
+				Having the Drug 
+				<input type="text" name="map-drug-gist" value="{{enteredDrugsList}}" id="drug_short_list" readonly>
+				<img src="images/closer.png" class="clearfield cleartableau">
+			</div>
+			<div class="tableau" id="drug_long_list">
+				<div>
+					<span>Drug Name</span>
+					<span>Quantity</span>
+					<img src="images/closer.png" class="closer" data-close="drug_long_list">
+				</div>
+				{{#each medicines}}
+					<div>
+						<img src="images/remove.png" class="rowremover">
+						<span>{{name}}</span>
+						<span>{{quantity}}</span>
+					</div>
+				{{/each}}
+				<form class="search-form">
+				    {{> inputAutocomplete settings=settings id="search-box" class="form-control" placeholder="Medicine name..." autocomplete="off"}}
+				    <input type="text" id="quantity" placeholder="Quantity..." autocomplete="off" />
+				    <input type="submit" value="" />
+				</form>
+			</div>
+			<div>
+				<p>Caution ! The Drug has been OCR Identified. Please verify the drug name before order and revise if required</p>
+			</div>
+		</section>
+		<article class="map-container">
+      {{> googleMap name="exampleMap" options=exampleMapOptions}}
+		</article>
+		<aside>
+			{{> storesList}}
+		</aside>
+	</div>
+</template>
+
+<template name="storesList">
+	<div id="search_info">
+		<img src="images/list_icon.png" >
+		{{stores.length}} Stores found for the following criteria<br><br>
+		<b>DISTANCE</b> - Any<br>
+		<b>DRUGS</b> - {{enteredDrugsList}}<br>
+	</div>
+	{{#each stores}}
+	  {{> store}}
+	{{/each}}
+</template>
+
+<template name="store">
+	<div class="stores_list">
+		<p>
+			<b>{{name}}</b><br>
+			{{address.street}}<br>
+			{{address.postalCode}} {{address.city}}, {{address.country}}<br>
+			<a href="mailto:support@store.com">support@store.com</a><br>
+			<a href="tel:+918041717222">07 XX XX XX XX</a><br>
+			<!-- {{stock}} -->
+		</p>
+		<button>ORDER HERE</button>
+	</div>
+</template>
+
+<template name="medicine">
+  {{name}}
+</template>
