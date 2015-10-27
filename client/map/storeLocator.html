@@ -41,7 +41,7 @@
 			</div>
 		</section>
 		<article class="map-container">
-      {{> googleMap name="exampleMap" options=exampleMapOptions}}
+      {{> googleMaps}}
 		</article>
 		<aside>
 			{{> storesList}}
@@ -77,4 +77,8 @@
 
 <template name="medicine">
   {{name}}
+</template>
+
+<template name="googleMaps">
+	<div id="map-canvas" style="width: 100%; height: 100%;"></div>
 </template>

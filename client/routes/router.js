@@ -11,3 +11,7 @@ Router.route('/', function () {
 Router.route('/store-locator', function () {
   this.render('storeLocator');
 });
+
+Router.route('/order-details', function () {
+  this.render('orderDetails');
+});

@@ -1,7 +1,124 @@
 Meteor.startup(function () {
-  GoogleMaps.load();
   Session.setDefault("prescription", []);
-  Session.setDefault("storesList", []);
+  Session.setDefault("storesList", Stores.find({}, {sort: {createdAt: 1}}).fetch());
+});
+
+markersListGlobal = [];
+map = undefined;
+
+function initializeMap () {
+  map = new google.maps.Map(document.getElementById('map-canvas'), {
+    center: new google.maps.LatLng(48.8588589, 2.335864),
+    zoom: 13
+  });
+}
+
+function addMarkers() {
+  var i;
+  // console.log(markersListGlobal);
+  for (i = 0; i < markersListGlobal.length; i++) {
+    markersListGlobal[i].setMap(map);
+  }
+  console.log("Markers added: " + markersListGlobal.length);
+}
+
+function clearMarkers () {
+  for (var i = 0; i < markersListGlobal.length; i++) {
+    markersListGlobal[i].setMap(null);
+  }
+}
+
+function updateMarkers () {
+  clearMarkers();
+  markersListGlobal = [];
+  prepareMarkers();
+  addMarkers();
+}
+
+function prepareMarkers () {
+  var storesList, marker, i, j, infoWindow, infoWindowContent, iconBase, markerIcon, storesListElements;
+
+  // storesList = Stores.find({}, { sort: { lat: -1 }}).fetch();
+  storesList = Session.get("storesList");
+  // console.log(storesList);
+  marker = [];
+  infoWindow = [];
+  iconBase = "http://maps.google.com/mapfiles/ms/icons/";
+
+  var funcbinder = function (marker, infoWindow) {
+    marker.addListener('click', function () {
+      infoWindow.open(map, marker);
+      infoWindow.ud_state = 1;
+    });
+  };
+  var infoWindowOpener = function (infoWindow, marker) {
+    if (infoWindow.ud_state === 0) {
+      infoWindow.open(map, marker);
+      infoWindow.ud_state = 1;
+    }
+  };
+  var infoWindowCloser = function (infoWindow) {
+    if (infoWindow.ud_state === 1) {
+      infoWindow.close();
+      infoWindow.ud_state = 0;
+    }
+  };
+  var infoWindowToggler = function (infoWindow, marker) {
+    if (infoWindow.ud_state) {
+      infoWindow.close();
+      infoWindow.ud_state = 0;
+    } else {
+      infoWindow.open(map, marker);
+      infoWindow.ud_state = 1;
+    }
+  };
+
+  for (var i = 0; i < storesList.length; i++) {
+    infoWindowContent = '<p>' +
+      '<strong>' + storesList[i].name + '</strong><br />' +
+      storesList[i].address.street + '<br />' +
+      storesList[i].address.postalCode + ' ' + storesList[i].address.city + ', ' + storesList[i].address.country + '<br />' +
+      '</p>';
+    markerIcon = iconBase + "green-dot.png";
+    infoWindow[i] = new google.maps.InfoWindow({
+      content: infoWindowContent
+    });
+    infoWindow[i].ud_state = 0;
+    marker[i] = new google.maps.Marker({
+      position: new google.maps.LatLng(storesList[i].lat, storesList[i].lng),
+      title: storesList[i].name,
+      icon: markerIcon
+    });
+
+    // funcbinder(marker[i], infoWindow[i]);
+    marker[i].addListener('click', _.bind(infoWindowOpener, null, infoWindow[i], marker[i]));
+
+    infoWindow[i].addListener('closeclick', _.bind(infoWindowCloser, null, infoWindow[i]));
+
+    map.addListener('click', _.bind(infoWindowCloser, null, infoWindow[i]));
+
+    // DOM elements 
+    storesListElements = document.getElementsByClassName("stores_list");
+    for (j = 0; j < storesListElements.length; j++) {
+      if (storesListElements[j].getElementsByTagName("b")[0].innerHTML === storesList[i].name) {
+        storesListElements[j].addEventListener('click', _.bind(infoWindowToggler, null, infoWindow[i], marker[i]));
+      }
+    }
+
+    markersListGlobal.push(marker[i]);
+  }
+}
+
+Template.googleMaps.onRendered(function () {
+  initializeMap();
+  google.maps.event.addListenerOnce(map, 'idle', function(){
+    // do something only the first time the map is loaded
+    google.maps.event.trigger(map, 'resize');
+    clearMarkers();
+    markersListGlobal = [];
+    prepareMarkers();
+    addMarkers();
+  });
 });
 
 Template.registerHelper("enteredDrugsList", function () {
@@ -16,15 +133,6 @@ Template.registerHelper("enteredDrugsList", function () {
 });
 
 Template.storeLocator.helpers({
-  exampleMapOptions: function () {
-    // Make sure the maps API has loaded
-    if (GoogleMaps.loaded()) {
-      return {
-        center: new google.maps.LatLng(48.8588589, 2.335864),
-        zoom: 13
-      };
-    }
-  },
   settings: function () {
     return {
       position: "bottom",
@@ -57,48 +165,11 @@ Template.storeLocator.onRendered(function () {
 
 Template.storesList.helpers({
 	stores: function () {
-  //   var storesList = Session.get("storesList").length ? Session.get("storesList") : Stores.find({}, {sort: {createdAt: 1}}).fetch();
-  //   Session.set("storesList", storesList);
-		// return storesList;
-    return Session.get("storesList").length ? Session.get("storesList") : Stores.find({}, {sort: {createdAt: 1}}).fetch();
+    var storesList = Session.get("storesList").length ? Session.get("storesList") : Stores.find({}, {sort: {createdAt: 1}}).fetch();
+    Session.set("storesList", storesList);
+		return storesList;
+    // return Session.get("storesList").length ? Session.get("storesList") : Stores.find({}, {sort: {createdAt: 1}}).fetch();
 	}
-});
-
-Template.storesList.onCreated(function () {
-  // We can use the 'ready' callback to interact with the map API once the map is ready
-  GoogleMaps.ready('exampleMap', function(map) {
-    // Add a marker to the map once it's ready
-    var storesList, markersList, lat, lng, i, infoWindow, iconBase, markerIcon;
-
-    storesList = Stores.find({}, { sort: { lat: -1 }}).fetch();
-    // storesList = Session.get("storesList");
-    // console.log(storesList);
-    markersList = [];
-    iconBase = "http://maps.google.com/mapfiles/ms/icons/";
-
-    for (i = 0; i < storesList.length; i++) {
-      lat = storesList[i].lat;
-      lng = storesList[i].lng;
-      infoWindow = '<p>' +
-        '<strong>' + storesList[i].name + '</strong><br />' +
-        storesList[i].address.street + '<br />' +
-        storesList[i].address.postalCode + ' ' + storesList[i].address.city + ', ' + storesList[i].address.country + '<br />' +
-        '</p>';
-
-      markerIcon = iconBase + "green-dot.png";
-        
-      if (lat !== "" && lng !== "") {
-        markersList.push({
-          position: new google.maps.LatLng(+lat, +lng),
-          title: storesList[i].name,
-          infoWindow: infoWindow,
-          icon: markerIcon
-        });
-      }
-    }
-
-    dropMarkers(markersList, map.instance);
-  });
 });
 
 var dropMarkers = function (markersList, map) {
@@ -166,16 +237,24 @@ var addMarkerWithTimeout = function (markerOptions, map, timeout) {
 Template.store.events({
   'click button': function (event) {
     $("#float_over").css({"display":"table"});
+    var orderDetails = {
+      date: new Date(),
+      store: this,
+      prescription: Session.get("prescription")
+    };
+    Session.set("orderDetails", orderDetails);
   }
 });
 
 Template.storeLocator.events({
   "click #drug_short_list": function () {
     $(".tableau").show();
+    $("#search-box").focus();
   },
   "click .cleartableau": function () {
     Session.set("prescription", []);
-    Session.set("storesList", []);
+    Session.set("storesList", Stores.find({}, {sort: {createdAt: 1}}).fetch());
+    updateMarkers();
   },
   'submit .search-form': function (event) {
     var searchTerm, quantity, prescription, medicinesList, isValidName, isValidQuantity, index, storeName;
@@ -288,6 +367,7 @@ function matchStores (prescription) {
     Session.set("storesList", matchedStores);
   }
   else {
-    Session.set("storesList", []);
+    Session.set("storesList", Stores.find({}, {sort: {createdAt: 1}}).fetch());
   }
+  updateMarkers();
 }
