@@ -1,12 +1,19 @@
 <template name="orderDetails">
-  <div id="wrapper" class="order_details_page">
+  <div id="wrapper">
+    <br><br>
+  </div>
+  <div id="wrapper2" class="onebg order_details_page">
+    <aside>STUTUT DE COMMANDE</aside>
     <section>
       <div>
-        <span>Viewing order details of APEK-12/345-15</span>
+        <span>
+          Viewing order details of - &nbsp;
+          <input type="text" value="APEK-12/345-15" />
+        </span>
         <span class="viewprescription" data-imgpath="thisisthepathplaceholder">View Uploaded Prescription</span>
       </div>
       <div>
-        Prescription Details
+        <h1>Prescription Details</h1>
       </div>
       <div class="tableau" id="drug_long_list">
         <div>
@@ -20,8 +27,9 @@
           </div>
         {{/each}}
       </div>
+      <hr />
       <div>
-        Billing Details
+        <h1>Billing Details</h1>
       </div>
       <div>
         <aside>

@@ -1,57 +1,36 @@
 <template name="header">
 	<header>
-		<div><img src="images/logo.png"></div>
+		<a href="/"><img src="/images/logo.png"></a>
 		<nav>
-			<section id="getordertrg">
-				<span>order id</span>
-				<input type="text" placeholder="Search Your Order Status">
-				<img src="images/closer.png" class="clearfield" id="oderIdClear">
-			</section>
-			<section id="find-store-btn">
-				find your store
-			</section>
-			<section id="getmedtrg">
-				get my medicines
-			</section>
+			<a href="/order-details"><img src="/images/rx.png"></a>
+			<a href="/store-locator"><img src="/images/find.png"></a>
+			<ul>
+				<li class="subind"><a href="#">COMMUNICATION</a>
+					<ul>
+						<li><a href="#">Promotion</a></li>
+						<li><a href="/gallery">Evénement</a></li>
+						<li><a href="#">Publicité</a></li>
+						<li><a href="#">Gain (euro)</a></li>
+					</ul>
+				</li>
+				<li class="subind"><a href="#">ACHAT</a>
+					<ul>
+						<li><a href="/partners">Partenaires</a></li>
+						<li><a href="#">Nouveautés</a></li>
+						<li><a href="#">Fournisseurs</a></li>
+					</ul>
+				</li>
+				<li class="subind"><a href="#">SERVICES</a>
+					<ul>
+						<li><a href="#">Formations</a></li>
+						<li><a href="#">Membres</a></li>
+						<li><a href="#">Clients</a></li>
+					</ul>
+				</li>
+				<li><a href="/contact">QUI SOMMES NOUS</a></li>
+				<li><a href="#">ACTUALITES</a></li>
+				<li><a href="#">COMPTE PERSO</a></li>
+			</ul>
 		</nav>
 	</header>
-	<section class="quickpanel" id="getmed">
-		<aside>
-			<span>Upload the prescription to OCR read your Prescription to auto generate your Prescription</span><br><br>
-			<input class="jointtext" type="text" placeholder="Upload your Prescription"><button class="jointbtn" type="button" id="upload-now-btn">UPLOAD NOW</button>
-		</aside>
-		<aside>
-			<span>You can also choose to enter the items of your prescription manually</span><br><br>
-			<button id="order-manually-btn" class="blubtn">PROCEED TO PLACE YOUR ORDER MANUALLY</button>
-		</aside>
-		<img src="images/closer.png" class="closer" data-close="getmed" >
-	</section>
-	<div id="float_over">
-		<div>
-			<form id="ordering_form">
-				<span>Placing Order with {{orderDetails.store.name}} for your prescription</span><br><br>
-				<label>Name</label>
-				<input type="text" id="customer-name" placeholder="Please enter your full name"/><br>
-				<label>Email ID</label>
-				<input type="text" id="customer-email" placeholder="Enter your Email ID"/><br>
-				<label>Phone Number</label>
-				<input type="text" id="customer-telephone" placeholder="Enter your phone number"/><br>
-				<label>Billing Address</label>
-				<input type="text" id="customer-address" placeholder="Enter your billing address"/><br>
-				<input type="submit" class="blubtn" value="CONFIRM ORDER"><button class="blubtn_wht" type="button">CANCEL</button>
-			</form>
-		</div>
-	</div>
-	<section class="quickpanel" id="getorder">
-		<aside>
-			<span>We have sent you am OTP to the mobile number and email ID used during the order placement</span><br>
-			<span>Please enter the OTP to proceed further to retrive the Oder information</span><br><br>
-			<span class="imp_alert">Due to security reasons we only disclose order information only to the person who has placed the order</span><br>
-		</aside>
-		<aside>
-			<span>Enter the OTP that you have received below to proceed</span><br><br>
-			<input class="jointtext" type="text" placeholder="Enter your OTP"><button class="jointbtn" type="button">PROCEED TO ORDER DETAILS</button>
-		</aside>
-		<img src="images/closer.png" class="closer" data-close="getorder" >
-	</section>
 </template>

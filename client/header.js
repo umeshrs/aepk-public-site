@@ -5,10 +5,6 @@ Template.header.events({
 			$("#getmed").css("display", "table");
 		}
 	},
-	'click #ordering_form > button': function (event) {
-	  $("#ordering_form").get(0).reset();
-	  $("#float_over").css({"display":"none"});
-	},
 	'submit #ordering_form': function (event) {
 		event.preventDefault();
 	},
@@ -46,6 +42,7 @@ Template.defaultLayout.events({
 		$(event.target).siblings("input[type='text']").val("");
 	},
 	'submit #ordering_form': function (event) {
+		console.log("hey");
 		event.preventDefault();
 		var orderDetails = Session.get("orderDetails");
 		orderDetails.customer = {

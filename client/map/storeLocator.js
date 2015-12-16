@@ -118,7 +118,17 @@ Template.googleMaps.onRendered(function () {
     markersListGlobal = [];
     prepareMarkers();
     addMarkers();
+    
+    $(".map_plot_page > aside").height($(window).innerHeight() - 307);
+    $(".map_plot_page > article").height($(window).innerHeight() - 307);
+    
+    $(window).resize(function(){
+      $(".map_plot_page > aside").height($(window).innerHeight() - 307);
+      $(".map_plot_page > article").height($(window).innerHeight() - 307);
+    });
   });
+  
+  
 });
 
 Template.registerHelper("enteredDrugsList", function () {
@@ -325,6 +335,10 @@ Template.storeLocator.events({
     prescription.splice(index, 1);
     Session.set("prescription", prescription);
     matchStores(prescription);
+  },
+  'click #ordering_form > button': function (event) {
+    $("#ordering_form").get(0).reset();
+    $("#float_over").css({"display":"none"});
   }
 });
 
