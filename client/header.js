@@ -1,3 +1,7 @@
+Template.header.onRendered(function () {
+  this.$("header").css("position", "fixed")
+});
+
 Template.header.events({
 	'click #getmedtrg': function (event) {
 		$(".quickpanel").hide();
