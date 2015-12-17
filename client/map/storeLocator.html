@@ -82,11 +82,11 @@
 <template name="store">
 	<div class="stores_list">
 		<p>
-			<b>{{name}}</b><br>
+			<b>{{storeName}}</b><br>
 			{{address.street}}<br>
 			{{address.postalCode}} {{address.city}}, {{address.country}}<br>
 			<a href="mailto:support@store.com">support@store.com</a><br>
-			<a href="tel:+918041717222">07 XX XX XX XX</a><br>
+			<a href="tel:+918041717222">{{telephone}}</a><br>
 			<!-- {{stock}} -->
 		</p>
 		<button>ORDER HERE</button>

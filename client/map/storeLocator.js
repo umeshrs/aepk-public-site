@@ -1,6 +1,6 @@
 Meteor.startup(function () {
   Session.setDefault("prescription", []);
-  Session.setDefault("storesList", Stores.find({}, {sort: {createdAt: 1}}).fetch());
+  Session.setDefault("storesList", Members.find({}, {sort: {createdAt: 1}}).fetch());
 });
 
 markersListGlobal = [];
@@ -92,7 +92,7 @@ function prepareMarkers () {
 
   for (var i = 0; i < storesList.length; i++) {
     infoWindowContent = '<p>' +
-      '<strong>' + storesList[i].name + '</strong><br />' +
+      '<strong>' + storesList[i].storeName + '</strong><br />' +
       storesList[i].address.street + '<br />' +
       storesList[i].address.postalCode + ' ' + storesList[i].address.city + ', ' + storesList[i].address.country + '<br />' +
       '</p>';
@@ -103,7 +103,7 @@ function prepareMarkers () {
     infoWindow[i].ud_state = 0;
     marker[i] = new google.maps.Marker({
       position: new google.maps.LatLng(storesList[i].lat, storesList[i].lng),
-      title: storesList[i].name,
+      title: storesList[i].storeName,
       icon: markerIcon
     });
 
@@ -117,7 +117,7 @@ function prepareMarkers () {
     // DOM elements 
     storesListElements = document.getElementsByClassName("stores_list");
     for (j = 0; j < storesListElements.length; j++) {
-      if (storesListElements[j].getElementsByTagName("b")[0].innerHTML === storesList[i].name) {
+      if ($(storesListElements[j]).find("b").html() === storesList[i].storeName) {
         storesListElements[j].addEventListener('click', _.bind(infoWindowToggler, null, infoWindow[i], marker[i]));
       }
     }
