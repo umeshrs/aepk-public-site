@@ -23,8 +23,8 @@ function initializeMap () {
     }
   ];
   map = new google.maps.Map(document.getElementById('map-canvas'), {
-    center: new google.maps.LatLng(48.8588589, 2.335864),
-    zoom: 13,
+    center: new google.maps.LatLng(46, 2.335864),
+    zoom: 6,
     styles: styles,
     mapTypeControl: false
   });
@@ -131,6 +131,8 @@ Template.googleMaps.onRendered(function () {
   google.maps.event.addListenerOnce(map, 'idle', function(){
     // do something only the first time the map is loaded
     google.maps.event.trigger(map, 'resize');
+    // explicitly recenter the map when it is rendered
+    map.setCenter(new google.maps.LatLng(46, 2.335864));
     clearMarkers();
     markersListGlobal = [];
     prepareMarkers();
