@@ -7,9 +7,26 @@ markersListGlobal = [];
 map = undefined;
 
 function initializeMap () {
+  var styles = [
+    {
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [
+        { visibility: "simplified" }
+      ]
+    }, {
+      featureType: "road",
+      elementType: "labels.icon",
+      stylers: [
+        { visibility: "off" }
+      ]
+    }
+  ];
   map = new google.maps.Map(document.getElementById('map-canvas'), {
     center: new google.maps.LatLng(48.8588589, 2.335864),
-    zoom: 13
+    zoom: 13,
+    styles: styles,
+    mapTypeControl: false
   });
 }
 
