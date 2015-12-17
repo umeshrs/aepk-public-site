@@ -31,3 +31,7 @@ Router.route('/gallery/album', function () {
 Router.route('/contact', function () {
   this.render('contact');
 });
+
+Router.route('/file-upload', function () {
+  this.render('fileUpload');
+});
