@@ -192,7 +192,7 @@ Template.storeLocator.onRendered(function () {
 
 Template.storesList.helpers({
 	stores: function () {
-    var storesList = Session.get("storesList").length ? Session.get("storesList") : Stores.find({}, {sort: {createdAt: 1}}).fetch();
+    var storesList = Session.get("storesList").length ? Session.get("storesList") : Members.find({}, {sort: {createdAt: 1}}).fetch();
     Session.set("storesList", storesList);
 		return storesList;
     // return Session.get("storesList").length ? Session.get("storesList") : Stores.find({}, {sort: {createdAt: 1}}).fetch();
@@ -280,7 +280,7 @@ Template.storeLocator.events({
   },
   "click .cleartableau": function () {
     Session.set("prescription", []);
-    Session.set("storesList", Stores.find({}, {sort: {createdAt: 1}}).fetch());
+    Session.set("storesList", Members.find({}, {sort: {createdAt: 1}}).fetch());
     updateMarkers();
   },
   'submit .search-form': function (event) {
@@ -389,8 +389,8 @@ function matchStores (prescription) {
       // console.log(matchedStores);
     }
     for (i = 0; i < matchedStores.length; i++) {
-      storeDetails = Stores.findOne({ _id: matchedStores[i].store_id });
-      matchedStores[i].name = storeDetails.name;
+      storeDetails = Members.findOne({ _id: matchedStores[i].store_id });
+      matchedStores[i].name = storeDetails.storeName;
       matchedStores[i].address = storeDetails.address;
       matchedStores[i].lat = storeDetails.lat;
       matchedStores[i].lng = storeDetails.lng;
@@ -398,7 +398,7 @@ function matchStores (prescription) {
     Session.set("storesList", matchedStores);
   }
   else {
-    Session.set("storesList", Stores.find({}, {sort: {createdAt: 1}}).fetch());
+    Session.set("storesList", Members.find({}, {sort: {createdAt: 1}}).fetch());
   }
   updateMarkers();
 }
