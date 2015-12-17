@@ -119,12 +119,12 @@ Template.googleMaps.onRendered(function () {
     prepareMarkers();
     addMarkers();
     
-    $(".map_plot_page > aside").height($(window).innerHeight() - 307);
-    $(".map_plot_page > article").height($(window).innerHeight() - 307);
+    $(".map_plot_page > aside").height($(window).innerHeight() - 94 - 80 - 76);
+    $(".map_plot_page > article").height($(window).innerHeight() - 94 - 80 - 76);
     
     $(window).resize(function(){
-      $(".map_plot_page > aside").height($(window).innerHeight() - 307);
-      $(".map_plot_page > article").height($(window).innerHeight() - 307);
+      $(".map_plot_page > aside").height($(window).innerHeight() - 94 - 80 - 76);
+      $(".map_plot_page > article").height($(window).innerHeight() - 94 - 80 - 76);
     });
   });
   
