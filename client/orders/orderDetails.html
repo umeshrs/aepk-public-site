@@ -1,61 +1,64 @@
 <template name="orderDetails">
-  <div id="wrapper">
-    <br><br>
-  </div>
-  <div id="wrapper2" class="onebg order_details_page">
-    <aside>STUTUT DE COMMANDE</aside>
-    <section>
-      <div>
+    <div id="wrapper">
+        <br><br>
+    </div>
+    <div id="wrapper2" class="onebg order_details_page">
+        <aside>STATUT DE COMMANDE</aside>
+        <section>
+            <div>
         <span>
-          Viewing order details of - &nbsp;
-          <input type="text" value="APEK-12/345-15" />
+          Voir les détails de la commade - &nbsp;
+          <input type="text" value="APEK-12/345-15"/>
         </span>
-        <span class="viewprescription" data-imgpath="thisisthepathplaceholder">View Uploaded Prescription</span>
-      </div>
-      <div>
-        <h1>Prescription Details</h1>
-      </div>
-      <div class="tableau" id="drug_long_list">
-        <div>
-          <span>Drug Name</span>
-          <span>Quantity</span>
-        </div>
-        {{#each orderDetails.prescription}}
-          <div>
-            <span>{{name}}</span>
-            <span>{{quantity}}</span>
-          </div>
-        {{/each}}
-      </div>
-      <hr />
-      <div>
-        <h1>Billing Details</h1>
-      </div>
-      <div>
+                <span class="viewprescription" data-imgpath="thisisthepathplaceholder">Voir l'ordonnance</span>
+            </div>
+            <div>
+                <h1>Détail de l'ordonnance</h1>
+            </div>
+            <div class="tableau" id="drug_long_list">
+                <div>
+                    <span>Nom du médicament</span>
+                    <span>Quantité</span>
+                </div>
+                {{#each orderDetails.prescription}}
+                    <div>
+                        <span>{{name}}</span>
+                        <span>{{quantity}}</span>
+                    </div>
+                {{/each}}
+            </div>
+            <hr/>
+            <div>
+                <h1>Détail de paiement</h1>
+            </div>
+            <div>
+                <aside>
+                    <span class="prec_ico_order_orderdate">{{orderDetails.date}}</span><br/>
+                    <span class="prec_ico_order_billingname">{{orderDetails.customer.name}}</span><br/>
+                    <span class="prec_ico_order_billingadress">{{orderDetails.customer.address}}</span><br/>
+                    <span class="prec_ico_order_spanhonenumber">{{orderDetails.customer.telephone}}</span><br/>
+                    <span class="prec_ico_order_emailid">{{orderDetails.customer.email}}</span><br/>
+                </aside>
+                <aside>
+                    <span class="prec_ico_order_pharmaname">{{orderDetails.store.name}}</span><br/>
+                    <span class="prec_ico_order_pharmacontact">John Travolta</span><br/>
+                    <span class="prec_ico_order_pharmaadress">{{orderDetails.store.address.street}}</span><br/>
+                    <span class="prec_ico_order_spanhonenumber"> +07 XXXXXX XXXXX</span><br/>
+                    <span class="prec_ico_order_emailid">support@store.com</span><br/>
+                </aside>
+            </div>
+        </section>
         <aside>
-          <span class="prec_ico_order_orderdate">{{orderDetails.date}}</span><br />
-          <span class="prec_ico_order_billingname">{{orderDetails.customer.name}}</span><br />
-          <span class="prec_ico_order_billingadress">{{orderDetails.customer.address}}</span><br />
-          <span class="prec_ico_order_spanhonenumber">{{orderDetails.customer.telephone}}</span><br />
-          <span class="prec_ico_order_emailid">{{orderDetails.customer.email}}</span><br />
+            <p>Statut du traitement de la commande pour {{orderDetails.store.name}} (Pharmacie)</p>
+            <article>
+                <p>Acceptée<b class="stat_complete"></b><span></span></p>
+
+                <p>En cours de traitement<b class="stat_progress"></b><span></span></p>
+
+                <p>En cours d'emballage<b class="stat_pending"></b><span></span></p>
+
+                <p>Prêt pour l'expédition<b class="stat_cancel"></b><span></span></p>
+            </article>
         </aside>
-        <aside>
-          <span class="prec_ico_order_pharmaname">{{orderDetails.store.name}}</span><br />
-          <span class="prec_ico_order_pharmacontact">John Travolta</span><br />
-          <span class="prec_ico_order_pharmaadress">{{orderDetails.store.address.street}}</span><br />
-          <span class="prec_ico_order_spanhonenumber"> +07 XXXXXX XXXXX</span><br />
-          <span class="prec_ico_order_emailid">support@store.com</span><br />
-        </aside>
-      </div>
-    </section>
-    <aside>
-      <p>Order Processing Details in {{orderDetails.store.name}}</p>
-      <article>
-        <p>Oder Accepted<b class="stat_complete"></b><span></span></p>
-        <p>Processing Order<b class="stat_progress"></b><span></span></p>
-        <p>Packing Order<b class="stat_pending"></b><span></span></p>
-        <p>Ready for despatch<b class="stat_cancel"></b><span></span></p>
-      </article>
-    </aside>
-  </div>
+    </div>
 </template>
