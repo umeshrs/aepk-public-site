@@ -1,102 +1,102 @@
 <template name="storeLocator">
-	<div id="float_over">
-		<div>
-			<form id="ordering_form">
-				<span>Placing Order with Store 9 for your prescription</span><br><br>
-				<label>Name</label><input type="text" id="customer-name" placeholder="Please enter your full name"/><br>
-				<label>Email ID</label><input type="text" id="customer-email" placeholder="Enter your Email ID"/><br>
-				<label>Phone Number</label><input type="text" id="customer-telephone" placeholder="Enter your phone number"/><br>
-				<label>Billing Address</label><input type="text" id="customer-address" placeholder="Enter your billing address"/><br><br>
-				<input type="submit" class="blubtn" value="CONFIRM ORDER"><button class="blubtn_wht" type="button">CANCEL</button>
-			</form>
-		</div>
-	</div>
-	<div id="wrapper">
-		<br><br>
-	</div>
-	<div id="wrapper2" class="onebg">
-		<aside>TROUVER VOTRE PHARMACIE</aside>
-		<div class="map_plot_page">
-			<section>
-				<span>Filters</span>
-				<div>
-					Show Store within 
-					<select>
-						<option>Any Range</option>
-						<option>1 KM</option>
-						<option>2 KM</option>
-						<option>5 KM</option>
-						<option>10 KM</option>
-					</select>
-				</div>
-				<div>
-					Having the Drug 
-					<input type="text" name="map-drug-gist" value="{{enteredDrugsList}}" id="drug_short_list" readonly>
-					<img src="images/closer.png" class="clearfield cleartableau">
-				</div>
-				<div class="tableau" id="drug_long_list">
-					<div>
-						<span>Drug Name</span>
-						<span>Quantity</span>
-						<img src="images/closer.png" class="closer" data-close="drug_long_list">
-					</div>
-					{{#each medicines}}
-						<div>
-							<img src="images/remove.png" class="rowremover">
-							<span>{{name}}</span>
-							<span>{{quantity}}</span>
-						</div>
-					{{/each}}
-					<form class="search-form">
-					    {{> inputAutocomplete settings=settings id="search-box" class="form-control" placeholder="Medicine name..." autocomplete="off"}}
-					    <input type="text" id="quantity" placeholder="Quantity..." autocomplete="off" />
-					    <input type="submit" value="" />
-					</form>
-				</div>
-				<div>
-					<p style="font-size: 13px">Caution ! The Drug has been OCR Identified. Please verify the drug name before order and revise if required</p>
-				</div>
-			</section>
-			<article class="map-container">
-	      {{> googleMaps}}
-			</article>
-			<aside>
-				{{> storesList}}
-			</aside>
-		</div>
-	</div>
+    <div id="float_over">
+        <div>
+            <form id="ordering_form">
+                <span>Passer commande avec 9 pharmacie avec votre ordonnance</span><br><br>
+                <label>Nom</label><input type="text" id="customer-name" placeholder="Veuillez entrer votre nom"/><br>
+                <label>Adresse email</label><input type="text" id="customer-email" placeholder="Veuillez entrer votre adresse email"/><br>
+                <label>Numéro de téléphone</label><input type="text" id="customer-telephone" placeholder="Veuillez entrer votre numéro de téléphone"/><br>
+                <label>Adresse de paiement</label><input type="text" id="customer-address" placeholder="Veuillez entrer votre adresse de paiement"/><br><br>
+                <input type="submit" class="blubtn" value="CONFIRMER LA COMMANDE"><button class="blubtn_wht" type="button">ANULLER</button>
+            </form>
+        </div>
+    </div>
+    <div id="wrapper">
+        <br><br>
+    </div>
+    <div id="wrapper2" class="onebg">
+        <aside>TROUVER UNE PHARMACIE</aside>
+        <div class="map_plot_page">
+            <section>
+                <span>Critère de recherche</span>
+                <div>
+                    Afficher les pharmacies qui se trouvent dans un rayon de
+                    <select>
+                        <option>Voir toutes les pharmacies</option>
+                        <option>1 KM</option>
+                        <option>2 KM</option>
+                        <option>5 KM</option>
+                        <option>10 KM</option>
+                    </select>
+                </div>
+                <div>
+                    Medicament dans la pharmacie
+                    <input type="text" name="map-drug-gist" value="{{enteredDrugsList}}" id="drug_short_list" readonly>
+                    <img src="images/closer.png" class="clearfield cleartableau">
+                </div>
+                <div class="tableau" id="drug_long_list">
+                    <div>
+                        <span>Nom de médicaments</span>
+                        <span>Quantité</span>
+                        <img src="images/closer.png" class="closer" data-close="drug_long_list">
+                    </div>
+                    {{#each medicines}}
+                        <div>
+                            <img src="images/remove.png" class="rowremover">
+                            <span>{{name}}</span>
+                            <span>{{quantity}}</span>
+                        </div>
+                    {{/each}}
+                    <form class="search-form">
+                        {{> inputAutocomplete settings=settings id="search-box" class="form-control" placeholder="Nom de l'officine..." autocomplete="off"}}
+                        <input type="text" id="quantity" placeholder="Quantité..." autocomplete="off" />
+                        <input type="submit" value="" />
+                    </form>
+                </div>
+                <div>
+                    <p>Attention ! Le médicamant n'a pas été trouvé. Veullez verifier le nom du médicament saisit.</p>
+                </div>
+            </section>
+            <article class="map-container">
+                {{> googleMaps}}
+            </article>
+            <aside>
+                {{> storesList}}
+            </aside>
+        </div>
+    </div>
 </template>
 
 <template name="storesList">
-	<div id="search_info">
-		<img src="images/list_icon.png" >
-		{{stores.length}} Stores found for the following criteria<br><br>
-		<b>DISTANCE</b> - Any<br>
-		<b>DRUGS</b> - {{enteredDrugsList}}<br>
-	</div>
-	{{#each stores}}
-	  {{> store}}
-	{{/each}}
+    <div id="search_info">
+        <img src="images/list_icon.png" >
+        {{stores.length}} Pharmacie(s) trouvée(s) avec les critères suivant<br><br>
+        <b>DISTANCE</b> - Tous<br>
+        <b>MÉDICAMENT</b> - {{enteredDrugsList}}<br>
+    </div>
+    {{#each stores}}
+        {{> store}}
+    {{/each}}
 </template>
 
 <template name="store">
-	<div class="stores_list">
-		<p>
-			<b>{{storeName}}</b><br>
-			{{address.street}}<br>
-			{{address.postalCode}} {{address.city}}, {{address.country}}<br>
-			<a href="mailto:support@store.com">support@store.com</a><br>
-			<a href="tel:+918041717222">{{telephone}}</a><br>
-			<!-- {{stock}} -->
-		</p>
-		<button>ORDER HERE</button>
-	</div>
+    <div class="stores_list">
+        <p>
+            <b>{{name}}</b><br>
+            {{address.street}}<br>
+            {{address.postalCode}} {{address.city}}, {{address.country}}<br>
+            <a href="mailto:support@store.com">support@store.com</a><br>
+            <a href="tel:+918041717222">07 XX XX XX XX</a><br>
+            <!-- {{stock}} -->
+        </p>
+        <button>COMMANDER DANS CETTE PHARMACIE</button>
+    </div>
 </template>
 
 <template name="medicine">
-  {{name}}
+    {{name}}
 </template>
 
 <template name="googleMaps">
-	<div id="map-canvas" style="width: 100%; height: 100%;"></div>
+    <div id="map-canvas" style="width: 100%; height: 100%;"></div>
 </template>
