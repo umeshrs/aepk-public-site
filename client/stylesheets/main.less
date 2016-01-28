@@ -93,3 +93,155 @@ header {
     visibility: hidden;
   }
 }
+
+#wrapper {
+  background-image: url("/images/banner-1.png");
+  background-size: cover;
+  border-bottom: 10px solid #2b60ac;
+}
+
+.container {
+  margin-top: 40px;
+
+  > h1 {
+    height: 60px;
+    margin: 40px auto;
+    line-height: 60px;
+    text-align: center;
+    font-weight: normal;
+
+    div {
+      display: inline-block;
+      padding: 0px 30px;
+      font-size: 30px;
+      color: white;
+      background-color: #EE9318;
+      border-radius: 25px;
+    }
+  }
+}
+
+#promotions-wrapper {
+  margin: 0px 50px;
+
+  .promo-item {
+    margin-right: 5px;
+    width: calc(~'25% - 5px - 4px') ;
+    float: left;
+    border: 2px solid #ED9217;
+
+    .promo-image {
+      height: 400px;
+      display: table;
+      img {
+        width: 100%;
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+
+    .promo-details {
+      background-color: #ed9217;
+      height: 160px;
+      text-align: center;
+
+      .promo-title {
+        padding: 20px 0px;
+        height: 20px;
+        font-size: 25px;
+        color: white;
+        text-transform: uppercase;
+      }
+
+      .promo-price {
+        height: 100px;
+        line-height: 100px;
+        font-size: 100px;
+        font-weight: bold;
+        color: #ffed00;
+
+        span {
+          font-size: 50px;
+          color: inherit;
+        }
+      }
+    }
+  }
+}
+
+footer {
+  > section:nth-of-type(1) {
+    height: 300px;
+    padding: 40px 10px;
+    background-color: #073576;
+    box-sizing: border-box;
+    white-space: nowrap;
+
+    > div {
+      display: inline-block;
+      vertical-align: top;
+      padding: 0px 30px;
+      box-sizing: border-box;
+      border-right: 2px solid #1e76f5;
+    }
+
+    > div:nth-of-type(n + 2) {
+      margin-left: -4px;
+    }
+
+    > div:last-of-type {
+      border-right: none;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #1e76f5;
+      font-size: 25px;
+      font-weight: normal;
+      text-transform: uppercase;
+    }
+
+    .fa {
+      font-size: 25px;
+      color: #1a171b;
+    }
+
+    span {
+      padding-left: 5px;
+      color: #1e76f5;
+    }
+
+    #navigation {
+      width: 20%;
+
+      ul {
+        line-height: 25px;
+        li {
+          color: #1e76f5;
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    #contact {
+      width: 28%;
+    }
+
+    #social-networks {
+      width: 22%;
+    }
+
+    #newsletter {
+      width: 30%;
+    }
+  }
+
+  > section:nth-of-type(2) {
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    background-color: #2b60ac;
+  }
+}
