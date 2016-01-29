@@ -106,7 +106,7 @@ header {
 }
 
 .container {
-  margin-top: 40px;
+  margin: 40px 0px;
 
   > h1 {
     height: 60px;
@@ -120,8 +120,19 @@ header {
       padding: 0px 30px;
       font-size: 30px;
       color: white;
-      background-color: #EE9318;
       border-radius: 25px;
+
+      &.bg-orange {
+        background-color: #EE9318;
+      }
+
+      &.bg-green {
+        background-color: #68a022;
+      }
+
+      &.bg-blue {
+        background-color: #1e76f5;
+      }
     }
   }
 }
@@ -172,6 +183,28 @@ header {
       }
     }
   }
+}
+
+.column-count(@count) {
+  -webkit-column-count: @count; /* Chrome, Safari, Opera */
+  -moz-column-count: @count; /* Firefox */
+  column-count: @count;
+}
+
+.column-gap(@gap) {
+  -webkit-column-gap: @gap; /* Chrome, Safari, Opera */
+  -moz-column-gap: @gap; /* Firefox */
+  column-gap: @gap;
+}
+
+#information-wrapper {
+  margin: 0px 50px;
+  padding: 20px 30px;
+  .column-count(2);
+  .column-gap(40px);
+  background-color: #f0f5e9;
+  color: #505050;
+  line-height: 20px;
 }
 
 footer {
