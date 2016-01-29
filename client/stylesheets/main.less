@@ -241,7 +241,7 @@ footer {
 
     .fa {
       font-size: 25px;
-      color: #1a171b;
+      color: #fff;
     }
 
     span {
@@ -268,17 +268,58 @@ footer {
     #social-networks {
       width: 22%;
 
-      > a {
-        margin: 0px 5px;
-      }
+      .social-icons {
+        text-align: center;
 
-      .fa {
-        font-size: 40px;
+        a {
+          margin: 0px 5px;
+        }
+
+        .fa {
+          font-size: 40px;
+          transition: color 0.2s;
+          &:hover {
+            color: #1a171b;
+          }
+        }
       }
     }
 
     #newsletter {
       width: 30%;
+
+      form {
+        background-color: white;
+        height: 40px;
+        border-radius: 20px;
+
+        #email {
+          width: calc(~'65% - 20px');
+          height: 34px;
+          margin: 3px 5px 3px 15px;
+          border: none;
+          outline: none;
+          font-size: 16px;
+        }
+
+        #newsletter-submit-btn {
+          width: calc(~'35% - 3px');
+          height: 34px;
+          margin: 3px 3px 3px 0px;
+          vertical-align: top;
+          background-color: #1e76f5;
+          opacity: 1;
+          color: white;
+          border-radius: 20px;
+          border: none;
+          outline: none;
+          cursor: pointer;
+
+          &:active {
+            opacity: 0.8;
+          }
+        }
+      }
     }
   }
 
