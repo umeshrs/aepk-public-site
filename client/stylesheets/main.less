@@ -115,12 +115,23 @@ header {
     text-align: center;
     font-weight: normal;
 
-    div {
+    > hr {
+      margin: 0px 50px;
+      top: 50%;
+      border: none;
+      border-top: 1px solid #1e76f5;
+      position: relative;
+      z-index: 1;
+    }
+
+    > div {
       display: inline-block;
       padding: 0px 30px;
       font-size: 30px;
       color: white;
       border-radius: 25px;
+      position: relative;
+      z-index: 2;
 
       &.bg-orange {
         background-color: #EE9318;
@@ -268,6 +279,59 @@ header {
           background-color: #EFA540;
         }
       }
+    }
+  }
+}
+
+#partners-wrapper {
+  margin: 0px 50px;
+  padding: 0px 0px 40px;
+  height: 100px;
+  overflow: hidden;
+  border-bottom: 1px solid #1e76f5;
+
+  .arrow-left {
+    float: left;
+    width: 0px;
+    height: 0px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 20px solid #8ebafa;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .arrow-right {
+    float: left;
+    width: 0px;
+    height: 0px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #8ebafa;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  #partners-slider {
+    float: left;
+    width: calc(~'100% - 20px - 20px');
+    height: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .partner {
+    display: inline-block;
+    height: 100%;
+
+    img {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 }
